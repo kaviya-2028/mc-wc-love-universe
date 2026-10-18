@@ -302,129 +302,126 @@ function openFeature(type){
  const title=$("featureTitle"),body=$("featureBody");
 
 
+
 if (type === "story") {
-  title.textContent = "💗 Our Anime Love Story";
+    title.textContent = "💗 Our Anime Love Story";
 
-  const photos = [
-    ["photo1.png", "Our First Memory 💗"],
-    ["photo2.png", "My Favourite Smile 🌸"],
-    ["photo3.png", "A Beautiful Moment 💕"],
-    ["photo4.png", "You & Me ❤️"],
-    ["photo5.png", "My Happy Place ✨"],
-    ["photo6.png", "Forever Favourite 💖"],
-    ["photo7.png", "Our Little World 🌷"],
-    ["photo8.png", "Sweet Memories 💝"],
-    ["photo9.png", "Just Us 🫶"],
-    ["photo10.png", "My Sunshine ☀️"],
-    ["photo11.png", "Together Always 💗"],
-    ["photo12.png", "Our Forever Story 🌌"]
-  ];
+    const photos = [
+        ["photo1.png", "Our First Memory 💗"],
+        ["photo2.png", "My Favourite Smile 🌸"],
+        ["photo3.png", "A Beautiful Moment 💕"],
+        ["photo4.png", "You & Me ❤️"],
+        ["photo5.png", "My Happy Place ✨"],
+        ["photo6.png", "Forever Favourite 💖"],
+        ["photo7.png", "Our Little World 🌷"],
+        ["photo8.png", "Sweet Memories 💝"],
+        ["photo9.png", "Just Us 🫶"],
+        ["photo10.png", "My Sunshine ☀️"],
+        ["photo11.png", "Together Always 💗"],
+        ["photo12.png", "Our Forever Story 🌌"]
+    ];
 
-  let photoIndex = 0;
-  let storyStarted = false;
+    let photoIndex = 0;
+    let slideshowTimer = null;
+    let storySong = null;
 
-  body.innerHTML = `
-    <div class="card">
-      <div id="storyOpening">
-        <p class="eyebrow">♡ TOUCH THE HEART ♡</p>
-        <button id="storyStart" class="story-heart"
-          aria-label="Start our love story">❤️</button>
-        <p class="eyebrow">A LITTLE MAGIC FOR US ✨</p>
-      </div>
+    body.innerHTML = `
+        <div class="card">
+            <div id="storyOpening">
+                <p class="eyebrow">♡ TOUCH THE HEART ♡</p>
+                <button id="storyStart"
+                    class="story-heart"
+                    aria-label="Start our love story">❤️</button>
+                <p class="eyebrow">A LITTLE MAGIC FOR US ✨</p>
+            </div>
 
-      <div id="storyGallery" class="hidden">
-        <img id="storyPhoto" class="story-photo" src=""
-          alt="Our love memory">
-        <h2 id="storyCaption"></h2>
+            <div id="storyGallery" class="hidden">
+                <img id="storyPhoto"
+                    class="story-photo"
+                    src=""
+                    alt="Our love memory">
 
-        <div class="story-controls">
-          <button id="storyPrev">❮ Previous</button>
-          <button id="storyNext">Next ❯</button>
+                <h2 id="storyCaption"></h2>
+
+                <div class="story-controls">
+                    <button id="storyPrev">⏮ Previous</button>
+                    <button id="storyNext">Next ⏭</button>
+                </div>
+
+                <!-- Hidden music player -->
+                <audio id="storySong"
+                    loop
+                    preload="auto">
+                    <source src="songs/our-song.mp3"
+                        type="audio/mpeg">
+                </audio>
+            </div>
         </div>
+    `;
 
-        <audio id="storySong" class="story-audio"
-          controls loop preload="auto">
-          <source src="songs/our-song.mp3" type="audio/mpeg">
-        </audio>
+    function showStoryPhoto() {
+        $("storyPhoto").src = photos[photoIndex][0];
+        $("storyCaption").textContent = photos[photoIndex][1];
 
-        <p style="font-size:14px;color:#ffc5de">
-          🎶 Our favourite song — use the audio controls to mute,
-          pause or adjust the volume.
-        </p>
-      </div>
-    </div>
-  `;
-
-  function showStoryPhoto() {
-    const photo = photos[photoIndex];
-    $("storyPhoto").src = photo[0];
-    $("storyCaption").textContent = photo[1];
-    $("storyPrev").disabled = photoIndex === 0;
-    $("storyNext").disabled = photoIndex === photos.length - 1;
-  }
-
-  function storyHeartBurst() {
-    const symbols = ["💗", "💕", "❤️", "💖", "🌸", "🌷", "✨"];
-
-    for (let i = 0; i < 65; i++) {
-      const item = document.createElement("span");
-      item.className = "burst";
-      item.textContent =
-        symbols[Math.floor(Math.random() * symbols.length)];
-
-      item.style.left = "50%";
-      item.style.top = "50%";
-
-      const angle = Math.random() * Math.PI * 2;
-      const distance = 50 + Math.random() * 300;
-
-      item.style.setProperty("--x", Math.cos(angle) * distance + "px");
-      item.style.setProperty("--y", Math.sin(angle) * distance + "px");
-      item.style.fontSize = (14 + Math.random() * 22) + "px";
-
-      document.body.appendChild(item);
-      setTimeout(() => item.remove(), 1700);
+        $("storyPrev").disabled = photoIndex === 0;
+        $("storyNext").disabled = photoIndex === photos.length - 1;
     }
-  }
 
-  $("storyStart").onclick = async () => {
-    if (storyStarted) return;
-    storyStarted = true;
+    function stopStory() {
+        clearInterval(slideshowTimer);
+        slideshowTimer = null;
 
-    sound(850);
-    storyHeartBurst();
-
-    setTimeout(() => {
-      $("storyOpening").classList.add("hidden");
-      $("storyGallery").classList.remove("hidden");
-      showStoryPhoto();
-
-      const song = $("storySong");
-      song.volume = 0.6;
-
-      // Browser may require the user's first tap to start music.
-      song.play().catch(() => {
-        const note = document.createElement("p");
-        note.textContent =
-          "🎵 Touch Play on the song player to start your music.";
-        song.insertAdjacentElement("afterend", note);
-      });
-    }, 1000);
-  };
-
-  $("storyPrev").onclick = () => {
-    if (photoIndex > 0) {
-      photoIndex--;
-      showStoryPhoto();
+        if (storySong) {
+            storySong.pause();
+            storySong.currentTime = 0;
+        }
     }
-  };
 
-  $("storyNext").onclick = () => {
-    if (photoIndex < photos.length - 1) {
-      photoIndex++;
-      showStoryPhoto();
-    }
-  };
+    // Stop the song and slideshow when Back is pressed.
+    const backButton = document.querySelector(
+        "#details .content > button"
+    );
+
+    // Remove any previous handler before adding a new one.
+    backButton.onclick = () => {
+        stopStory();
+        goHome();
+    };
+
+    $("storyStart").onclick = async () => {
+        $("storyOpening").classList.add("hidden");
+        $("storyGallery").classList.remove("hidden");
+
+        photoIndex = 0;
+        showStoryPhoto();
+
+        // Change photo every 3 seconds and repeat forever.
+        clearInterval(slideshowTimer);
+        slideshowTimer = setInterval(() => {
+            photoIndex = (photoIndex + 1) % photos.length;
+            showStoryPhoto();
+        }, 3000);
+
+        storySong = $("storySong");
+        storySong.volume = 0.7;
+
+        try {
+            await storySong.play();
+        } catch (error) {
+            // If autoplay is blocked, browser restrictions
+            // may require another user interaction.
+        }
+    };
+
+    $("storyPrev").onclick = () => {
+        photoIndex = (photoIndex - 1 + photos.length) % photos.length;
+        showStoryPhoto();
+    };
+
+    $("storyNext").onclick = () => {
+        photoIndex = (photoIndex + 1) % photos.length;
+        showStoryPhoto();
+    };
 }
  if(type==="gift"){
   title.textContent="🎂 MC's Birthday Surprise";
