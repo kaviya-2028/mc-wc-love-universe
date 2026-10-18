@@ -458,6 +458,7 @@ if (type === "story") {
     <p>Touch the candle flame for your birthday wish!</p>
     <div class="candle" id="candle" role="button" tabindex="0">🔥</div>`;
   
+
 function celebrate() {
     const g = $("birthdayGreeting");
 
@@ -469,62 +470,39 @@ function celebrate() {
     g.innerHTML = `
         <h2 class="birthday-message">
             🎆 Happy Birthday<br>
-            My Dear Porukii...!❤️
+            My Dear Porukii...! ❤️
         </h2>
 
         <p style="font-size:22px">MC ❤️ WC</p>
-
         <p>You are loved more than words can say! 💖</p>
 
         <div class="card">
             <h2>🎵 A Song Just For You</h2>
 
-            <input
-                type="file"
-                id="birthdaySongFile"
-                accept="audio/*"
-                style="width:100%;margin:12px 0"
-            >
+            <audio id="birthdayAudio"
+                   controls
+                   autoplay
+                   playsinline
+                   style="width:100%">
+                <source
+                    src="my-birthday-song.mp3"
+                    type="audio/mpeg">
+            </audio>
 
-            <audio
-                id="birthdayAudio"
-                controls
-                style="width:100%;display:none"
-            ></audio>
-
-            <p id="songMessage">
-                Choose your birthday song to play it 💗
-            </p>
+            <p>Happy Birthday, my love! ❤️🎂</p>
+            <p>If music doesn't start, touch Play 🎶</p>
         </div>
     `;
 
-    const fileInput = $("birthdaySongFile");
     const player = $("birthdayAudio");
-    const message = $("songMessage");
+    player.volume = 1;
 
-    fileInput.addEventListener("change", function() {
-        const file = this.files[0];
-        if (!file) return;
-
-        if (player.dataset.oldUrl) {
-            URL.revokeObjectURL(player.dataset.oldUrl);
-        }
-
-        const songUrl = URL.createObjectURL(file);
-        player.dataset.oldUrl = songUrl;
-        player.src = songUrl;
-        player.style.display = "block";
-        message.textContent = "Happy Birthday, my love! ❤️🎂";
-
-        player.play().catch(() => {
-            message.textContent =
-                "Touch Play to start your birthday song 🎵";
-        });
+    player.play().catch(() => {
+        // If autoplay is blocked, the Play button remains available.
     });
 
     fireworks();
 }
-
     
     // Candle flame click
     $("candle").onclick = celebrate;
