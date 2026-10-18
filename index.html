@@ -64,6 +64,16 @@ p{line-height:1.8}
 #letter{white-space:pre-line;line-height:1.9;color:#ffe3ef;font-family:'Dancing Script',cursive;font-size:26px}
 @media(max-width:480px){.memory-grid{grid-template-columns:1fr 1fr}.memory-item img{height:160px}.option{font-size:13px;padding:10px 4px}.heart{font-size:85px}h1{letter-spacing:0}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important}}
+
+.forever-title {
+  font-family: 'Dancing Script', cursive;
+  font-size: clamp(38px, 8vw, 58px);
+  font-weight: 700;
+  line-height: 1.4;
+  color: #ffc5de;
+  text-shadow: 0 0 10px #ff8fbd,
+               0 0 22px #ff285e;
+}
 </style>
 </head>
 <body>
@@ -84,8 +94,8 @@ p{line-height:1.8}
 
 <section class="page hidden" id="home">
  <div class="content">
-  <p class="eyebrow">♡ OUR FOREVER STORY ♡</p>
-  <h1>MC ♥ WC<br>Love Universe</h1>
+<p class="eyebrow">♡ OUR FOREVER STORY ♡</p>
+<h1 class="forever-title">MC ♥ WC<br>Love Universe</h1>
   <p>Two hearts, one beautiful universe. 💕</p>
   <div class="grid">
    <button class="option" onclick="openFeature('story')"><span>🌸</span>Our Anime<br>Love Story</button>
