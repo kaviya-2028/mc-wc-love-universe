@@ -3,340 +3,401 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#23091e">
 <title>MC WC Love Universe ❤️</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Pacifico&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
 *{box-sizing:border-box}
-body{margin:0;background:#170716;color:#fff0f7;font-family:Georgia,serif}
+:root{--pink:#ff8fbd;--pale:#ffe2ef;--red:#ff285e;--dark:#170716}
+body{margin:0;background:var(--dark);color:#fff0f7;font-family:'Quicksand',sans-serif}
 button,input{font:inherit}
-button{cursor:pointer;color:white;border:1px solid #ff9ec8;background:#ff397b30;
-border-radius:25px;padding:12px 17px;margin:6px;transition:.25s}
+button{cursor:pointer;color:white;border:1px solid #ff9ec8;background:#ff397b30;border-radius:25px;padding:12px 17px;margin:6px;transition:.25s}
 button:hover{background:#ff397b70;box-shadow:0 0 20px #ff4388}
-.page{min-height:100vh;min-height:100dvh;display:flex;align-items:center;
-justify-content:center;text-align:center;padding:28px 16px;position:relative;
-overflow:hidden;background:radial-gradient(ellipse at top,#8f2457,#40132f 52%,#120716)}
+button:focus-visible{outline:2px solid white;outline-offset:4px}
+.page{min-height:100vh;min-height:100dvh;display:flex;align-items:center;justify-content:center;text-align:center;padding:30px 16px;position:relative;overflow:hidden;background:radial-gradient(ellipse at top,#81234f,#40132f 52%,#120716)}
 .content{position:relative;z-index:2;width:100%;max-width:700px}
-h1{font-size:clamp(33px,8vw,55px);color:#ffd8e8;
-text-shadow:0 0 12px #ff4d98,0 0 30px #ff176b;line-height:1.25}
-h2{color:#ffb8d6}
+h1{font-family:'Pacifico',cursive;font-size:clamp(32px,8vw,52px);font-weight:400;line-height:1.5;letter-spacing:1px;color:#ffe1ef;text-shadow:0 0 8px #ff8fbe,0 0 18px #ff3989,0 0 35px #ff174f}
+h2{font-family:'Dancing Script',cursive;font-size:34px;color:#ffb7d5;text-shadow:0 0 15px #ff438b}
 p{line-height:1.8}
-.eyebrow{font:11px Arial,sans-serif;letter-spacing:3px;color:#ffc5dc}
+.eyebrow{font-family:'Dancing Script',cursive;font-size:20px;letter-spacing:2px;color:#ffc5de}
 .hidden{display:none!important}
-.heart{display:block;margin:25px auto;border:0;background:none;font-size:105px;
-filter:drop-shadow(0 0 13px #ff174f) drop-shadow(0 0 30px #ff174f);
-animation:beat 1s infinite}
+.heart{display:block;margin:25px auto;border:0;background:none;font-size:105px;filter:drop-shadow(0 0 13px #ff174f) drop-shadow(0 0 30px #ff174f);animation:beat 1s infinite}
 @keyframes beat{50%{transform:scale(1.16)}}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin:23px 0}
-.option{min-height:120px;border-radius:18px;background:#ffffff10;font-size:15px}
-.option span{display:block;font-size:33px;margin-bottom:8px}
-.card{padding:19px;border:1px solid #ff9fc666;border-radius:19px;
-background:#260d25e8;margin:17px 0}
-.star{position:fixed;color:#ffe4f0;pointer-events:none;animation:twinkle 2s infinite alternate}
+.option{min-height:120px;border-radius:18px;background:#ffffff10;font-size:15px;border:1px solid #ff9dc966;box-shadow:0 0 12px #ff408515}
+.option:hover{transform:translateY(-5px);box-shadow:0 0 24px #ff4388}
+.option span{display:block;font-size:34px;margin-bottom:8px}
+.card{padding:19px;border:1px solid #ff9fc666;border-radius:19px;background:#260d25e8;margin:17px 0;box-shadow:0 0 15px #ff287b20,inset 0 0 20px #ff287b10;backdrop-filter:blur(8px)}
+#stars{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+.star{position:absolute;color:#ffe4f0;pointer-events:none;animation:twinkle 2s infinite alternate}
 @keyframes twinkle{to{opacity:.2;transform:scale(.6)}}
-.petal{position:fixed;top:-35px;z-index:5;pointer-events:none;
-animation:fall linear forwards}
+.petal{position:fixed;top:-35px;z-index:5;pointer-events:none;animation:fall linear forwards}
 @keyframes fall{to{transform:translate(80px,110vh) rotate(600deg);opacity:0}}
 .burst{position:fixed;z-index:20;pointer-events:none;animation:explode 1.6s forwards}
 @keyframes explode{to{transform:translate(var(--x),var(--y)) scale(1.5);opacity:0}}
-input[type=file]{max-width:100%;margin:15px;color:white}
-.photos{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
-.photos img{width:100%;height:220px;object-fit:cover;border-radius:14px;
-border:1px solid #ff94bf;cursor:pointer}
-#viewer{display:none;position:fixed;inset:0;background:#100612f7;z-index:999;
-align-items:center;justify-content:center;flex-direction:column;padding:15px}
-#viewer img{max-width:96%;max-height:82vh;object-fit:contain;border-radius:12px}
-#countdown{font-size:clamp(20px,5vw,29px);line-height:1.9;color:#ffc6de}
-#letter{white-space:pre-line;line-height:1.9;color:#ffe3ef}
+.floating-love{position:fixed;left:var(--left);top:110vh;z-index:1;pointer-events:none;user-select:none;opacity:0;animation:loveFloat var(--duration) linear forwards;filter:drop-shadow(0 0 8px #ff4b91)}
+@keyframes loveFloat{0%{transform:translate(0,0) rotate(0) scale(.6);opacity:0}12%{opacity:.9}50%{transform:translate(var(--sway),-55vh) rotate(150deg) scale(1);opacity:1}100%{transform:translate(calc(var(--sway)*-1),-125vh) rotate(360deg) scale(.7);opacity:0}}
+#welcome{background:radial-gradient(ellipse at 50% 40%,#8f245766,transparent 50%),linear-gradient(145deg,#190719,#40102f,#20091f)}
+#welcome .content{animation:welcomeAppear 1.5s ease-out}
+@keyframes welcomeAppear{from{opacity:0;transform:translateY(25px) scale(.94)}to{opacity:1;transform:translateY(0) scale(1)}}
+#letter{white-space:pre-line;line-height:1.9;color:#ffe3ef;font-family:'Dancing Script',cursive;font-size:25px}
 .gift{font-size:100px;animation:beat 1s infinite}
-.birthday-cake{font-size:100px;animation:cakeRise 1.2s ease-out;
-filter:drop-shadow(0 0 20px #ff72b6)}
-@keyframes cakeRise{from{transform:translateY(100px) scale(.3);opacity:0}
-to{transform:translateY(0) scale(1);opacity:1}}
-.candle{font-size:35px;display:inline-block;cursor:pointer;animation:flame .5s infinite alternate;
-filter:drop-shadow(0 0 13px orange)}
+.birthday-cake{font-size:100px;animation:cakeRise 1.2s ease-out;filter:drop-shadow(0 0 20px #ff72b6)}
+@keyframes cakeRise{from{transform:translateY(100px) scale(.3);opacity:0}to{transform:translateY(0) scale(1);opacity:1}}
+.candle{font-size:42px;display:inline-block;cursor:pointer;animation:flame .5s infinite alternate;filter:drop-shadow(0 0 13px orange)}
 @keyframes flame{to{transform:scale(1.25);filter:drop-shadow(0 0 23px gold)}}
-.birthday-message{font-size:clamp(28px,7vw,43px);color:#ffe1ee;
-text-shadow:0 0 12px #ff2e86,0 0 30px #ff0055;animation:appear .8s ease-out}
+.birthday-message{font-family:'Dancing Script',cursive;font-size:clamp(30px,8vw,46px);color:#ffe1ee;text-shadow:0 0 12px #ff2e86,0 0 30px #ff0055;animation:appear .8s ease-out}
 @keyframes appear{from{opacity:0;transform:scale(.3)}to{opacity:1;transform:scale(1)}}
-.firework{position:fixed;z-index:1000;pointer-events:none;font-size:25px;
-animation:firework 1.8s ease-out forwards}
+.firework{position:fixed;z-index:1000;pointer-events:none;font-size:25px;animation:firework 1.8s ease-out forwards}
 @keyframes firework{to{transform:translate(var(--fx),var(--fy)) scale(1.8) rotate(180deg);opacity:0}}
-.scene{font-size:clamp(43px,12vw,65px);padding:30px 5px;border-radius:18px;
-background:linear-gradient(145deg,#54234d,#bd658b,#39204c)}
+.scene{font-size:clamp(43px,12vw,65px);padding:30px 5px;border-radius:18px;background:linear-gradient(145deg,#54234d,#bd658b,#39204c)}
 .dialogue{white-space:pre-line;font-size:17px;line-height:1.9}
-@media(max-width:380px){.grid{gap:7px}.option{font-size:13px;padding:10px 3px}.photos img{height:155px}}
+.song{padding:13px;margin:12px 0;border:1px solid #ff9fc655;border-radius:14px;background:#ffffff08}
+.song a{color:#ffc6de}
+@media(max-width:480px){h1{font-size:36px}h2{font-size:29px}#letter{font-size:22px}}
+@media(max-width:380px){.grid{gap:7px}.option{font-size:13px;padding:10px 3px}.heart{font-size:90px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important}}
 </style>
 </head>
 
 <body>
 <div id="stars"></div>
 
-<!-- FIRST WELCOME PAGE -->
+<!-- WELCOME -->
 <section class="page" id="welcome">
-<div class="content">
-<p class="eyebrow">✧ A UNIVERSE MADE FOR TWO ✧</p>
-<h1>Welcome to Our<br>Love Universe 💗</h1>
-<p>MC <span style="color:#ff90bc">♥</span> WC</p>
-<p class="eyebrow">──── ♡ ✦ ♡ ────</p>
-<p>In every universe, my heart finds you. ✨</p>
-<button class="heart" id="start" aria-label="Enter Love Universe">❤️</button>
-<p class="eyebrow">TOUCH OUR GLOWING HEART</p>
-</div>
+  <div class="content">
+    <p class="eyebrow">✧ A UNIVERSE MADE FOR TWO ✧</p>
+    <h1>Welcome to Our<br>Love Universe 💗</h1>
+    <p style="font-family:'Dancing Script',cursive;font-size:30px">MC <span style="color:#ff90bc">♥</span> WC</p>
+    <p class="eyebrow">──── ♡ ✦ ♡ ────</p>
+    <p>In every universe, my heart finds you. ✨</p>
+    <button class="heart" id="start" aria-label="Enter Love Universe">❤️</button>
+    <p class="eyebrow">TOUCH OUR GLOWING HEART</p>
+  </div>
 </section>
 
 <!-- MAIN MENU -->
 <section class="page hidden" id="home">
-<div class="content">
-<p class="eyebrow">♡ OUR FOREVER STORY ♡</p>
-<h1>MC WC<br><span style="font-style:italic">Love Universe</span></h1>
-<p>Two hearts, one beautiful universe. 💕</p>
-<div class="grid">
-<button class="option" onclick="openFeature('memories')"><span>📸</span>Love Memories<br>& Photos</button>
-<button class="option" onclick="openFeature('gift')"><span>🎁</span>Animated<br>Surprise Gift</button>
-<button class="option" onclick="openFeature('birthday')"><span>🎂</span>MC Birthday<br>October 28</button>
-<button class="option" onclick="openFeature('letter')"><span>💌</span>Secret Love<br>Letter</button>
-</div>
-<button onclick="openFeature('story')">🌸 Our Anime Love Story</button>
-<button id="musicButton" onclick="toggleMusic()">🎶 Play Romantic Music</button>
-<p class="eyebrow">✨ FOREVER US ✨</p>
-</div>
+  <div class="content">
+    <p class="eyebrow">♡ OUR FOREVER STORY ♡</p>
+    <h1>MC WC<br><span style="font-family:'Dancing Script',cursive">Love Universe</span></h1>
+    <p>Two hearts, one beautiful universe. 💕</p>
+
+    <div class="grid">
+      <button class="option" onclick="openFeature('story')"><span>🌸</span>Our Anime<br>Love Story</button>
+      <button class="option" onclick="openFeature('gift')"><span>🎁</span>Surprise Gift<br>Birthday Countdown</button>
+      <button class="option" onclick="openFeature('songs')"><span>🎧</span>Love Language<br>Romantic Songs</button>
+      <button class="option" onclick="openFeature('letter')"><span>💌</span>Secret Love<br>Letter</button>
+    </div>
+
+    <button id="musicButton" onclick="toggleMusic()">🎶 Play Romantic Music</button>
+    <p class="eyebrow">✨ TWO HEARTS, ONE UNIVERSE ✨</p>
+  </div>
 </section>
 
-<!-- FEATURES PAGE -->
+<!-- FEATURE PAGE -->
 <section class="page hidden" id="details">
-<div class="content">
-<p class="eyebrow">♡ JUST FOR YOU ♡</p>
-<h1 id="featureTitle">Our Story</h1>
-<div id="featureBody"></div>
-<button onclick="goHome()">← Back to Love Universe</button>
-</div>
+  <div class="content">
+    <p class="eyebrow">♡ JUST FOR YOU ♡</p>
+    <h1 id="featureTitle">Our Story</h1>
+    <div id="featureBody"></div>
+    <button onclick="goHome()">← Back to Love Universe</button>
+  </div>
 </section>
-
-<!-- FULL SCREEN PHOTO -->
-<div id="viewer" onclick="if(event.target===this)closeViewer()">
-<img id="largePhoto" alt="Love memory">
-<button onclick="closeViewer()">✕ Close Photo</button>
-</div>
 
 <script>
-const $=id=>document.getElementById(id);
-const pageIds=["welcome","home","details"];
-let musicOn=false,audio=null,musicTimer=null,noteIndex=0,episode=0,photoURLs=[];
+const $ = id => document.getElementById(id);
+const pageIds = ["welcome","home","details"];
+let musicOn = false, audio = null, musicTimer = null;
+let noteIndex = 0, episode = 0;
 
 function showPage(id){
-pageIds.forEach(p=>$(p).classList.add("hidden"));
-$(id).classList.remove("hidden");
-window.scrollTo(0,0);
+  pageIds.forEach(p => $(p).classList.add("hidden"));
+  $(id).classList.remove("hidden");
+  window.scrollTo(0,0);
 }
-function sound(){
-try{
-audio=audio||new(window.AudioContext||window.webkitAudioContext)();
-audio.resume();
-const o=audio.createOscillator(),g=audio.createGain();
-o.type="sine";o.frequency.value=760;
-g.gain.setValueAtTime(.05,audio.currentTime);
-g.gain.exponentialRampToValueAtTime(.001,audio.currentTime+.25);
-o.connect(g);g.connect(audio.destination);o.start();o.stop(audio.currentTime+.25);
-}catch(e){}
+function sound(freq=760){
+  try{
+    audio = audio || new (window.AudioContext || window.webkitAudioContext)();
+    audio.resume();
+    const o=audio.createOscillator(), g=audio.createGain();
+    o.type="sine";
+    o.frequency.value=freq;
+    g.gain.setValueAtTime(.045,audio.currentTime);
+    g.gain.exponentialRampToValueAtTime(.001,audio.currentTime+.25);
+    o.connect(g);g.connect(audio.destination);
+    o.start();o.stop(audio.currentTime+.25);
+  }catch(e){}
 }
 function heartBurst(){
-const symbols=["💗","💕","❤️","💖","✨","🌸","♡"];
-for(let i=0;i<70;i++){
-const el=document.createElement("span");el.className="burst";
-el.textContent=symbols[Math.floor(Math.random()*symbols.length)];
-el.style.left="50%";el.style.top="50%";
-const a=Math.random()*Math.PI*2,d=60+Math.random()*280;
-el.style.setProperty("--x",Math.cos(a)*d+"px");
-el.style.setProperty("--y",Math.sin(a)*d+"px");
-el.style.fontSize=(12+Math.random()*20)+"px";
-document.body.appendChild(el);setTimeout(()=>el.remove(),1700);
-}
+  const symbols=["💗","💕","❤️","💖","✨","🌸","♡"];
+  for(let i=0;i<70;i++){
+    const el=document.createElement("span");
+    el.className="burst";
+    el.textContent=symbols[Math.floor(Math.random()*symbols.length)];
+    el.style.left="50%";el.style.top="50%";
+    const a=Math.random()*Math.PI*2,d=60+Math.random()*280;
+    el.style.setProperty("--x",Math.cos(a)*d+"px");
+    el.style.setProperty("--y",Math.sin(a)*d+"px");
+    el.style.fontSize=(12+Math.random()*20)+"px";
+    document.body.appendChild(el);
+    setTimeout(()=>el.remove(),1700);
+  }
 }
 $("start").onclick=()=>{sound();heartBurst();setTimeout(()=>showPage("home"),500)};
 
-// Stars and falling petals
-for(let i=0;i<40;i++){
-const s=document.createElement("span");s.className="star";
-s.textContent=Math.random()>.5?"✦":"✧";
-s.style.left=Math.random()*100+"vw";s.style.top=Math.random()*100+"vh";
-s.style.animationDelay=Math.random()*3+"s";s.style.fontSize=(10+Math.random()*20)+"px";
-$("stars").appendChild(s);
+// Stars
+for(let i=0;i<45;i++){
+  const s=document.createElement("span");
+  s.className="star";
+  s.textContent=Math.random()>.5?"✦":"✧";
+  s.style.left=Math.random()*100+"%";
+  s.style.top=Math.random()*100+"%";
+  s.style.animationDelay=Math.random()*3+"s";
+  s.style.fontSize=(10+Math.random()*20)+"px";
+  $("stars").appendChild(s);
 }
+
+// Falling petals
 setInterval(()=>{
-const p=document.createElement("span");p.className="petal";
-p.textContent=["🌸","💗","🌷","💕"][Math.floor(Math.random()*4)];
-p.style.left=Math.random()*100+"vw";
-p.style.animationDuration=(7+Math.random()*8)+"s";
-document.body.appendChild(p);setTimeout(()=>p.remove(),16000);
+  const p=document.createElement("span");
+  p.className="petal";
+  p.textContent=["🌸","💗","🌷","💕"][Math.floor(Math.random()*4)];
+  p.style.left=Math.random()*100+"vw";
+  p.style.animationDuration=(7+Math.random()*8)+"s";
+  document.body.appendChild(p);
+  setTimeout(()=>p.remove(),16000);
 },1000);
+
+// Floating hearts and stars
+(function floatingLoveUniverse(){
+  const symbols=["💗","♡","💕","♥","✨","✦","🌸","💖"];
+  function create(){
+    const item=document.createElement("span");
+    item.className="floating-love";
+    item.textContent=symbols[Math.floor(Math.random()*symbols.length)];
+    item.style.setProperty("--left",Math.random()*100+"vw");
+    item.style.setProperty("--duration",(8+Math.random()*9)+"s");
+    item.style.setProperty("--sway",(Math.random()*140-70)+"px");
+    item.style.fontSize=(14+Math.random()*20)+"px";
+    document.body.appendChild(item);
+    setTimeout(()=>item.remove(),18000);
+  }
+  for(let i=0;i<14;i++)setTimeout(create,i*350);
+  setInterval(create,900);
+})();
 
 function goHome(){showPage("home")}
 
 function openFeature(type){
-sound();showPage("details");
-const title=$("featureTitle"),body=$("featureBody");
+  sound();
+  showPage("details");
+  const title=$("featureTitle"),body=$("featureBody");
 
-if(type==="memories"){
-title.textContent="📸 Our Love Memories";
-body.innerHTML=`<div class="card">
-<p>Every picture holds a piece of our love. 💗</p>
-<p>Choose your photos below. Touch a photo to view it full screen.</p>
-<input id="photoInput" type="file" accept="image/*" multiple>
-<div id="photoGrid" class="photos"></div>
-</div>`;
-$("photoInput").onchange=e=>{
-photoURLs.forEach(url=>URL.revokeObjectURL(url));photoURLs=[];
-$("photoGrid").innerHTML="";
-Array.from(e.target.files).forEach(file=>{
-const url=URL.createObjectURL(file);photoURLs.push(url);
-const img=document.createElement("img");img.src=url;img.alt="Our love memory";
-img.onclick=()=>{$("largePhoto").src=url;$("viewer").style.display="flex"};
-$("photoGrid").appendChild(img);
-});
-};
-}
+  // 🎁 Birthday countdown + gift box + cake + candle + fireworks
+  if(type==="gift"){
+    title.textContent="🎂 MC's Birthday Surprise";
+    body.innerHTML=`
+      <div class="card">
+        <p>Countdown to October 28 ❤️</p>
+        <div id="giftCountdown" style="font-size:20px;color:#ffc6de;line-height:1.8">Loading...</div>
+        <hr style="border-color:#ff8fba55;margin:22px 0">
+        <h2>A little surprise for MC 💗</h2>
+        <div id="giftBox" class="gift" role="button" tabindex="0" aria-label="Open birthday gift">🎁</div>
+        <p id="giftHint">Touch the gift box to open it! ✨</p>
+        <div id="cakeArea"></div>
+        <div id="birthdayGreeting"></div>
+      </div>`;
 
-if(type==="gift"){
-title.textContent="🎁 Birthday Surprise for MC";
-body.innerHTML=`<div class="card">
-<p id="giftHint">A special surprise is waiting for MC! 💗</p>
-<div class="gift" id="giftBox">🎁</div>
-<button id="openGift">OPEN YOUR GIFT 💝</button>
-<div id="cakeArea"></div>
-<div id="birthdayGreeting"></div>
-</div>`;
+    function updateGiftCountdown(){
+      const now=new Date();
+      let target=new Date(now.getFullYear(),9,28);
+      if(now>=target)target=new Date(now.getFullYear()+1,9,28);
+      const diff=target-now,el=$("giftCountdown");
+      if(!el)return;
+      el.textContent=`${Math.floor(diff/86400000)} days ${Math.floor(diff%86400000/3600000)} hours ${Math.floor(diff%3600000/60000)} min ${Math.floor(diff%60000/1000)} sec`;
+    }
+    updateGiftCountdown();
+    const giftTimer=setInterval(()=>{
+      if(!$("giftCountdown")){clearInterval(giftTimer);return}
+      updateGiftCountdown();
+    },1000);
 
-$("openGift").onclick=()=>{
-sound();
-$("giftBox").style.display="none";
-$("openGift").style.display="none";
-$("giftHint").textContent="SURPRISE, MY DEAR MC! 🎉";
-$("cakeArea").innerHTML=`
-<div style="color:#ffc4df">✨ A cake made with love ✨</div>
-<div class="birthday-cake">🎂</div>
-<p>Touch the candle flame! 🕯️</p>
-<div class="candle" id="candle" role="button" tabindex="0">🔥</div>`;
-const flame=$("candle");
-function celebrate(){
-const greeting=$("birthdayGreeting");
-if(greeting.dataset.done==="yes")return;
-greeting.dataset.done="yes";sound();
-greeting.innerHTML=`
-<h2 class="birthday-message">🎆 Happy Birthday<br>My Dear Porukii ❤️</h2>
-<p style="font-size:21px">MC ❤️ WC 💋</p>
-<p>You are loved more than words can say! 💖</p>`;
-flame.textContent="✨";fireworks();
-}
-flame.onclick=celebrate;
-flame.onkeydown=e=>{
-if(e.key==="Enter"||e.key===" "){e.preventDefault();celebrate()}
-};
-};
-}
+    function openGiftBox(){
+      if(!$("giftBox")||$("giftBox").style.display==="none")return;
+      sound(600);
+      $("giftBox").style.display="none";
+      $("giftHint").textContent="SURPRISE, MY DEAR MC! 💖";
+      $("cakeArea").innerHTML=`
+        <h2>Make a wish, MC! ✨</h2>
+        <div class="birthday-cake">🎂</div>
+        <p>Touch the candle flame for your birthday wish! 🕯️</p>
+        <div class="candle" id="candle" role="button" tabindex="0" aria-label="Touch candle flame">🔥</div>`;
+      const flame=$("candle");
+      function celebrate(){
+        const greeting=$("birthdayGreeting");
+        if(greeting.dataset.done==="yes")return;
+        greeting.dataset.done="yes";
+        sound(880);
+        greeting.innerHTML=`
+          <h2 class="birthday-message">🎆 Happy Birthday<br>My Dear Porukii ❤️</h2>
+          <p style="font-size:22px">MC ❤️ WC</p>
+          <p>You are loved more than words can say! 💖</p>`;
+        flame.textContent="✨";
+        fireworks();
+      }
+      flame.onclick=celebrate;
+      flame.onkeydown=e=>{
+        if(e.key==="Enter"||e.key===" "){e.preventDefault();celebrate()}
+      };
+    }
+    $("giftBox").onclick=openGiftBox;
+    $("giftBox").onkeydown=e=>{
+      if(e.key==="Enter"||e.key===" "){e.preventDefault();openGiftBox()}
+    };
+  }
 
-if(type==="birthday"){
-title.textContent="🎂 MC's Birthday";
-body.innerHTML=`<div class="card">
-<div style="font-size:65px">🎂🎉🎆</div>
-<p>Counting down to October 28!</p>
-<div id="countdown">Loading...</div>
-<p>Happy Birthday, MC! ❤️</p>
-<p>WC's favourite person deserves all the happiness in the universe. 💗</p>
-</div>`;
-updateBirthday();
-}
+  // 🎧 Love Language
+  if(type==="songs"){
+    title.textContent="🎧 Love Language";
+    body.innerHTML=`
+      <div class="card">
+        <h2>💕 Our Romantic Playlist</h2>
+        <p>Choose a song and let it speak for our love.</p>
+        <div class="song">
+          <p>🎵 Perfect — Ed Sheeran</p>
+          <a href="https://www.youtube.com/results?search_query=Ed+Sheeran+Perfect+official"
+             target="_blank" rel="noopener">▶ Listen on YouTube</a>
+        </div>
+        <div class="song">
+          <p>💖 Until I Found You — Stephen Sanchez</p>
+          <a href="https://www.youtube.com/results?search_query=Stephen+Sanchez+Until+I+Found+You+official"
+             target="_blank" rel="noopener">▶ Listen on YouTube</a>
+        </div>
+        <div class="song">
+          <p>🌹 A Thousand Years — Christina Perri</p>
+          <a href="https://www.youtube.com/results?search_query=Christina+Perri+A+Thousand+Years+official"
+             target="_blank" rel="noopener">▶ Listen on YouTube</a>
+        </div>
+        <div class="song">
+          <p>💕 Romantic Love Songs Playlist</p>
+          <a href="https://www.youtube.com/results?search_query=romantic+love+songs+playlist"
+             target="_blank" rel="noopener">▶ Explore the playlist</a>
+        </div>
+        <p style="font-family:'Dancing Script',cursive;font-size:26px">
+          You are my favourite song, on repeat, forever. 💌
+        </p>
+      </div>`;
+  }
 
-if(type==="letter"){
-title.textContent="💌 Secret Love Letter";
-body.innerHTML=`<div class="card">
-<div style="font-size:55px">💌</div>
-<p>A little secret from WC's heart...</p>
-<button id="openLetter">OPEN MY LETTER 💗</button>
-<div id="letter"></div></div>`;
-$("openLetter").onclick=()=>{
-sound();
-$("letter").textContent=
-"My dearest MC, ❤️\n\nYou make ordinary days feel magical. Your smile is my favourite sight, and every moment with you becomes a memory I want to keep forever.\n\nNo matter where life takes us, I hope we keep choosing each other, again and again. You are my favourite hello and my sweetest forever.\n\nWith all my love,\nWC ❤️";
-$("openLetter").textContent="FOREVER YOURS 💖";
-};
-}
-if(type==="story"){episode=0;renderEpisode()}
-}
+  // 💌 Secret letter from WC to MC
+  if(type==="letter"){
+    title.textContent="💌 Secret Love Letter";
+    body.innerHTML=`
+      <div class="card">
+        <div style="font-size:55px">💌</div>
+        <p>A little secret from WC's heart...</p>
+        <button id="openLetter">OPEN MY LETTER 💗</button>
+        <div id="letter"></div>
+      </div>`;
+    $("openLetter").onclick=()=>{
+      sound();
+      $("letter").textContent=
+`My dearest MC, ❤️
 
-function closeViewer(){$("viewer").style.display="none";$("largePhoto").src=""}
+You make ordinary days feel magical. Your smile is my favourite sight, and every moment with you becomes a memory I want to keep forever.
 
-function updateBirthday(){
-const now=new Date();let target=new Date(now.getFullYear(),9,28);
-if(now>=target)target=new Date(now.getFullYear()+1,9,28);
-const d=target-now,el=$("countdown");if(!el)return;
-el.textContent=`${Math.floor(d/86400000)} days ${Math.floor(d%86400000/3600000)} hours ${Math.floor(d%3600000/60000)} min ${Math.floor(d%60000/1000)} sec`;
+No matter where life takes us, I hope we keep choosing each other, again and again. You are my favourite hello and my sweetest forever.
+
+With all my love,
+WC ❤️`;
+      $("openLetter").textContent="FOREVER YOURS 💖";
+    };
+  }
+
+  // 🌸 Anime-style love story
+  if(type==="story"){episode=0;renderEpisode()}
 }
-setInterval(updateBirthday,1000);
 
 function fireworks(){
-const symbols=["🎆","✨","💖","🎇","💕","🌟","❤️"];
-for(let i=0;i<100;i++){
-setTimeout(()=>{
-const f=document.createElement("span");f.className="firework";
-f.textContent=symbols[Math.floor(Math.random()*symbols.length)];
-f.style.left=(5+Math.random()*90)+"vw";
-f.style.top=(10+Math.random()*65)+"vh";
-f.style.setProperty("--fx",(Math.random()*220-110)+"px");
-f.style.setProperty("--fy",(Math.random()*220-110)+"px");
-document.body.appendChild(f);setTimeout(()=>f.remove(),1900);
-},i*22);
-}
+  const symbols=["🎆","✨","💖","🎇","💕","🌟","❤️"];
+  for(let i=0;i<100;i++){
+    setTimeout(()=>{
+      const f=document.createElement("span");
+      f.className="firework";
+      f.textContent=symbols[Math.floor(Math.random()*symbols.length)];
+      f.style.left=(5+Math.random()*90)+"vw";
+      f.style.top=(10+Math.random()*65)+"vh";
+      f.style.setProperty("--fx",(Math.random()*220-110)+"px");
+      f.style.setProperty("--fy",(Math.random()*220-110)+"px");
+      document.body.appendChild(f);
+      setTimeout(()=>f.remove(),1900);
+    },i*22);
+  }
 }
 
 const episodes=[
-["💕 Episode 1 — The Beginning","🌸 👦🏻 💗 👧🏻 🌸","MC: The day I met you, my world became brighter.\nWC: And you became my favourite hello. 💗"],
-["🌧️ Episode 2 — Little Moments","🌧️ ☂️ 👫 💕","WC: Even rainy days feel lovely with you.\nMC: Then I will always be your sunshine. ☀️"],
-["🌅 Sunset Dreams","🌅 👫 🌷","MC: Let's collect a million beautiful memories.\nWC: As long as I have you beside me. 💖"],
-["🌌 Episode 3 — Forever Us","🌌 ✨ 💑 ❤️","WC: Will you stay beside me through every chapter?\nMC: Every chapter, every season, forever. ❤️"],
-["🎂 Birthday Special","🎂 🎉 🎆 💖","MC: Happy birthday, my dear Porukii! May your life be full of happiness and love. 💗"]
+  ["💕 Episode 1 — The Beginning","🌸 👦🏻 💗 👧🏻 🌸","MC: The day I met you, my world became brighter.\nWC: And you became my favourite hello. 💗"],
+  ["🌧️ Episode 2 — Little Moments","🌧️ ☂️ 👫 💕","WC: Even rainy days feel lovely with you.\nMC: Then I will always be your sunshine. ☀️"],
+  ["🌅 Sunset Dreams","🌅 👫 🌷","MC: Let's collect a million beautiful memories.\nWC: As long as I have you beside me. 💖"],
+  ["🌌 Episode 3 — Forever Us","🌌 ✨ 💑 ❤️","WC: Will you stay beside me through every chapter?\nMC: Every chapter, every season, forever. ❤️"],
+  ["🎂 Birthday Special","🎂 🎉 🎆 💖","MC: Happy birthday, my dear Porukii! May your life be full of happiness and love. 💗"]
 ];
+
 function renderEpisode(){
-const ep=episodes[episode];$("featureTitle").textContent=ep[0];
-$("featureBody").innerHTML=`<div class="card">
-<div class="scene">${ep[1]}</div>
-<p class="dialogue" id="dialogue"></p>
-<button id="read">🔊 Read Dialogue</button>
-<button id="next">${episode===episodes.length-1?"Start Again ↻":"Next Scene ➜"}</button>
-</div>`;
-$("dialogue").textContent=ep[2];
-$("read").onclick=()=>{
-if(!("speechSynthesis" in window)){alert("Voice not supported in this browser.");return}
-speechSynthesis.cancel();
-const u=new SpeechSynthesisUtterance(ep[2].replace("\n"," "));
-u.rate=.88;u.pitch=1.15;speechSynthesis.speak(u);
-};
-$("next").onclick=()=>{episode=(episode+1)%episodes.length;renderEpisode();sound()};
+  const ep=episodes[episode];
+  $("featureTitle").textContent=ep[0];
+  $("featureBody").innerHTML=`
+    <div class="card">
+      <div class="scene">${ep[1]}</div>
+      <p class="dialogue" id="dialogue"></p>
+      <button id="read">🔊 Read Dialogue</button>
+      <button id="next">${episode===episodes.length-1?"Start Again ↻":"Next Scene ➜"}</button>
+    </div>`;
+  $("dialogue").textContent=ep[2];
+  $("read").onclick=()=>{
+    if(!("speechSynthesis" in window)){alert("Voice is not supported in this browser.");return}
+    speechSynthesis.cancel();
+    const u=new SpeechSynthesisUtterance(ep[2].replace("\n"," "));
+    u.rate=.88;u.pitch=1.15;
+    speechSynthesis.speak(u);
+  };
+  $("next").onclick=()=>{episode=(episode+1)%episodes.length;renderEpisode();sound()};
 }
 
+// 🎶 Gentle synthesized romantic melody
 function toggleMusic(){
-if(musicOn){
-musicOn=false;clearTimeout(musicTimer);
-if(audio)audio.suspend();
-$("musicButton").textContent="🎶 Play Romantic Music";return;
-}
-try{
-audio=audio||new(window.AudioContext||window.webkitAudioContext)();
-audio.resume();musicOn=true;
-$("musicButton").textContent="🔇 Stop Romantic Music";
-playMelody();
-}catch(e){alert("Audio not available in this browser.")}
+  if(musicOn){
+    musicOn=false;
+    clearTimeout(musicTimer);
+    if(audio)audio.suspend();
+    $("musicButton").textContent="🎶 Play Romantic Music";
+    return;
+  }
+  try{
+    audio=audio||new(window.AudioContext||window.webkitAudioContext)();
+    audio.resume();musicOn=true;
+    $("musicButton").textContent="🔇 Stop Romantic Music";
+    playMelody();
+  }catch(e){alert("Audio is not available in this browser.")}
 }
 function playMelody(){
-if(!musicOn||!audio)return;
-const notes=[261.63,329.63,392,329.63,293.66,349.23,392,349.23];
-const o=audio.createOscillator(),g=audio.createGain();
-o.type="sine";o.frequency.value=notes[noteIndex++%notes.length];
-g.gain.setValueAtTime(.0001,audio.currentTime);
-g.gain.exponentialRampToValueAtTime(.035,audio.currentTime+.12);
-g.gain.exponentialRampToValueAtTime(.0001,audio.currentTime+.6);
-o.connect(g);g.connect(audio.destination);o.start();o.stop(audio.currentTime+.65);
-musicTimer=setTimeout(playMelody,650);
+  if(!musicOn||!audio)return;
+  const notes=[261.63,329.63,392,329.63,293.66,349.23,392,349.23];
+  const o=audio.createOscillator(),g=audio.createGain();
+  o.type="sine";
+  o.frequency.value=notes[noteIndex++%notes.length];
+  g.gain.setValueAtTime(.0001,audio.currentTime);
+  g.gain.exponentialRampToValueAtTime(.035,audio.currentTime+.12);
+  g.gain.exponentialRampToValueAtTime(.0001,audio.currentTime+.6);
+  o.connect(g);g.connect(audio.destination);
+  o.start();o.stop(audio.currentTime+.65);
+  musicTimer=setTimeout(playMelody,650);
 }
 </script>
 </body>
