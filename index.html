@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800&family=Dancing+Script:wght@400;500;600;700&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Tamil:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box}
 :root{--pink:#ff8fbd;--red:#ff285e;--dark:#170716}
@@ -154,6 +154,123 @@ p{line-height:1.8}
   border-radius: 18px;
   border: 1px solid #ff8fbd;
   box-shadow: 0 0 24px #ff398966;
+}
+  
+/* Vintage handwritten Tamil love letter */
+.vintage-letter {
+    max-width: 650px;
+    margin: 20px auto;
+    padding: 30px 24px;
+    position: relative;
+    overflow: hidden;
+
+    background:
+        radial-gradient(ellipse at top left,
+            #fff7df 0%, transparent 55%),
+        linear-gradient(135deg, #f8e8c5, #ead3a4);
+
+    color: #593323;
+    border: 2px solid #b58a56;
+    outline: 1px solid #d7b77e;
+    outline-offset: -9px;
+    border-radius: 4px;
+
+    box-shadow:
+        0 10px 30px #0006,
+        inset 0 0 35px #b58a5635;
+
+    text-align: left;
+}
+
+.letter-decoration {
+    text-align: center;
+    font-size: 38px;
+    margin: 4px 0 12px;
+    filter: drop-shadow(0 2px 4px #8e352b55);
+}
+
+.letter-date {
+    text-align: center;
+    font-family: 'Dancing Script', cursive;
+    font-size: 23px;
+    color: #925044;
+}
+
+.tamil-letter-title {
+    font-family: 'Noto Serif Tamil', serif;
+    font-size: 25px;
+    color: #7d302d;
+    text-align: left;
+    text-shadow: none;
+    margin: 24px 0 15px;
+}
+
+.tamil-handwriting {
+    font-family: 'Noto Serif Tamil', serif;
+    font-size: 17px;
+    font-weight: 500;
+    line-height: 2.15;
+    letter-spacing: 0.1px;
+    color: #573727;
+}
+
+.tamil-handwriting p {
+    margin: 0 0 20px;
+    text-indent: 20px;
+}
+
+.letter-signature {
+    margin-top: 30px;
+    text-align: right;
+    font-family: 'Noto Serif Tamil', serif;
+    font-size: 16px;
+    line-height: 1.9;
+    color: #74392f;
+}
+
+.signature-name {
+    font-family: 'Dancing Script', cursive;
+    font-size: 30px;
+    font-weight: 700;
+    color: #a22e48;
+}
+
+.wax-seal {
+    width: 76px;
+    height: 76px;
+    margin: 25px auto 12px;
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: radial-gradient(circle, #d65d62, #85202e);
+    color: #ffe4bf;
+    font-family: 'Dancing Script', cursive;
+    font-size: 23px;
+
+    border: 3px solid #a94b48;
+    box-shadow: 0 4px 10px #60302555;
+}
+
+.letter-footer {
+    margin-top: 18px;
+    text-align: center;
+    font-family: 'Noto Serif Tamil', serif;
+    font-size: 13px;
+    color: #995d48;
+}
+
+@media (max-width: 480px) {
+    .vintage-letter {
+        padding: 25px 19px;
+    }
+
+    .tamil-handwriting {
+        font-size: 15px;
+        line-height: 2;
+    }
 }
 </style>
 </head>
@@ -536,132 +653,128 @@ function celebrate() {
 
 } // Closes the gift feature
  
+
 if (type === "songs") {
     title.textContent = "🎧 Our Love Language";
+
+    const songs = [
+        ["song1.mp3", "Our First Song 💗"],
+        ["song2.mp3", "My Favourite Melody 💕"],
+        ["song3.mp3", "You & Me ❤️"],
+        ["song4.mp3", "Forever Love 🌹"],
+        ["song5.mp3", "My Sweetheart 💖"],
+        ["song6.mp3", "Our Memories ✨"],
+        ["song7.mp3", "Love You Always 💝"],
+        ["song8.mp3", "My World 🌎"],
+        ["song9.mp3", "Only You 💘"],
+        ["song10.mp3", "Our Special Song 💞"],
+        ["song11.mp3", "Endless Love 🌸"],
+        ["song12.mp3", "Forever Together 💍"],
+        ["song13.mp3", "My Everything ❤️"]
+    ];
 
     body.innerHTML = `
         <div class="card">
             <h2>💗 Our Favourite Songs</h2>
             <p>Every song reminds me of you ❤️</p>
-
-            <div class="song">
-                <p>💕 Our Song</p>
-                <audio controls preload="none" style="width:100%">
-                    <source src="song1.mp3" type="audio/mpeg">
-                </audio>
-            </div>
-
-            <div class="song">
-                <p>💕 Our Song</p>
-                <audio controls preload="none" style="width:100%">
-                    <source src="song2.mp3" type="audio/mpeg">
-                </audio>
-            </div>
-
-            <div class="song">
-                <p>💕 Our Song</p>
-                <audio controls preload="none" style="width:100%">
-                    <source src="song3.mp3" type="audio/mpeg">
-                </audio>
-            </div>
-
-            <div class="song">
-                <p>💕 Our Song</p>
-                <audio controls preload="none" style="width:100%">
-                    <source src="song4.mp3" type="audio/mpeg">
-                </audio>
-            </div>
-
-            <div class="song">
-                <p>💕 Our Song</p>
-                <audio controls preload="none" style="width:100%">
-                    <source src="song5.mp3" type="audio/mpeg">
-                </audio>
-            </div>
-
-            <div class="song">
-                <p>💕 Our Song</p>
-                <audio controls preload="none" style="width:100%">
-                    <source src="song6.mp3" type="audio/mpeg">
-                </audio>
-            </div>
-
-            <div class="song">
-                <p>💕 Our Song</p>
-                <audio controls preload="none" style="width:100%">
-                    <source src="song7.mp3" type="audio/mpeg">
-                </audio>
-            </div>
-
-            <div class="song">
-                <p>💕 Our Song</p>
-                <audio controls preload="none" style="width:100%">
-                    <source src="song8.mp3" type="audio/mpeg">
-                </audio>
-            </div>
-
-            <div class="song">
-                <p>💕 Our Song</p>
-                <audio controls preload="none" style="width:100%">
-                    <source src="song9.mp3" type="audio/mpeg">
-                </audio>
-            </div>
-
-            <div class="song">
-                <p>💕 Our Song</p>
-                <audio controls preload="none" style="width:100%">
-                    <source src="song10.mp3" type="audio/mpeg">
-                </audio>
-            </div>
-
-            <div class="song">
-                <p>💕 Our Song</p>
-                <audio controls preload="none" style="width:100%">
-                    <source src="song11.mp3" type="audio/mpeg">
-                </audio>
-            </div>
-
-            <div class="song">
-                <p>💕 Our Song</p>
-                <audio controls preload="none" style="width:100%">
-                    <source src="song12.mp3" type="audio/mpeg">
-                </audio>
-            </div>
-
-            <div class="song">
-                <p>💕 Our Song</p>
-                <audio controls preload="none" style="width:100%">
-                    <source src="song13.mp3" type="audio/mpeg">
-                </audio>
-            </div>
-
+            <div id="loveSongList"></div>
             <p style="font-family:'Dancing Script',cursive;font-size:26px">
                 You are my favourite song, forever. 💌
             </p>
         </div>
     `;
+
+    const list = $("loveSongList");
+
+    songs.forEach((song, index) => {
+        const item = document.createElement("div");
+        item.className = "song";
+
+        const label = document.createElement("p");
+        label.textContent = "🎵 " + song[1];
+
+        const player = document.createElement("audio");
+        player.controls = true;
+        player.preload = "none";
+        player.style.width = "100%";
+
+        const source = document.createElement("source");
+        source.src = song[0];
+        source.type = "audio/mpeg";
+        player.appendChild(source);
+
+        // Stop every other song when this song starts.
+        player.addEventListener("play", () => {
+            document.querySelectorAll("#loveSongList audio").forEach(other => {
+                if (other !== player) {
+                    other.pause();
+                }
+            });
+        });
+
+        // Automatically play the next song when this one ends.
+        player.addEventListener("ended", () => {
+            const allPlayers = [...document.querySelectorAll("#loveSongList audio")];
+            const nextIndex = (index + 1) % allPlayers.length;
+
+            allPlayers[nextIndex].play().catch(() => {
+                // Some browsers may require another tap.
+            });
+        });
+
+        item.appendChild(label);
+        item.appendChild(player);
+        list.appendChild(item);
+    });
 }
 
- if(type==="letter"){
-  title.textContent="💌 Secret Love Letter";
-  body.innerHTML=`
-   <div class="card"><div style="font-size:55px">💌</div>
-    <p>A little secret from WC's heart...</p>
-    <button id="openLetter">OPEN MY LETTER 💗</button><div id="letter"></div>
-   </div>`;
-  $("openLetter").onclick=()=>{
-   sound();
-   $("letter").textContent=`My dearest MC, ❤️
 
-You make ordinary days feel magical. Your smile is my favourite sight, and every moment with you becomes a memory I want to keep forever.
+if (type === "letter") {
+    title.textContent = "💌 என் உயிரான MC-க்கு";
 
-No matter where life takes us, I hope we keep choosing each other, again and again. You are my favourite hello and my sweetest forever.
+    body.innerHTML = `
+        <div class="vintage-letter">
+            <div class="letter-decoration">🌹</div>
 
-With all my love,
-WC ❤️`;
-   $("openLetter").textContent="FOREVER YOURS 💖";
-  };
- }
+            <p class="letter-date">என்றென்றும் உனக்காக...</p>
+
+            <h2 class="letter-title">My Dear MC, ❤️</h2>
+
+            <div class="tamil-handwriting">
+                <p>
+                வார்த்தைகளால் சொல்ல முடியாத பல உணர்வுகளை
+                இந்தக் கடிதத்தின் மூலம் உன்னிடம் பகிர்ந்து கொள்ள
+                விரும்புகிறேன். நீ என் வாழ்க்கைக்குள் வந்த அந்த
+                நிமிடம் முதல், என் உலகம் முழுவதும் அழகாக
+                மாறிவிட்டது. உன்னுடன் இருக்கும்போது எனக்குள்
+                ஏற்படும் அந்த பாதுகாப்பான உணர்வும், மகிழ்ச்சியும்
+                வேறு எங்கும் எனக்குக் கிடைத்ததில்லை.
+                </p>
+
+                <p>
+                என் கைகளைப் பிடித்துக் கொண்டு நீ நடக்கும் அழகும்,
+                நாம் பேசும் சின்னச் சின்ன அரட்டைகளும், எப்போதுமே
+                எனக்குள் நீ தரும் தைரியமும் என் வாழ்க்கையின்
+                வரங்கள். நீ என் காதலன் மட்டுமல்ல,
+                எனக்கு எல்லாமும் நீதான்.
+                </p>
+
+                <p>
+                நம்முடைய இந்த அழகான அன்பிற்கு நான் என்றும்
+                கடமைப்பட்டிருக்கிறேன். உன்னை என் உயிராக
+                நேசிக்கிறேன். ❤️
+                </p>
+            </div>
+
+            <div class="letter-signature">
+                <p>என்றென்றும் உன் நினைவுகளுடன்,</p>
+                <p class="signature-name">உன்னவள் WC 💗</p>
+            </div>
+
+            <div class="wax-seal">M ♥ W</div>
+            <div class="letter-footer">✧ நம் காதல் என்றும் தொடரட்டும் ✧</div>
+        </div>
+    `;
 }
 
 function openFullPhoto(src){
