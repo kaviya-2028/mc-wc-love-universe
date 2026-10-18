@@ -369,16 +369,13 @@ function heartBurst() {
     }
 }
   
+
 document.getElementById("start").addEventListener("click", function () {
     heartBurst();
 
-    const heart = document.getElementById("start");
-    heart.style.pointerEvents = "none";
-
     setTimeout(function () {
-        document.getElementById("welcome").classList.add("hidden");
-        document.getElementById("home").classList.remove("hidden");
-        window.scrollTo(0, 0);
+        showPage("home");
+        document.getElementById("start").style.pointerEvents = "auto";
     }, 300);
 });
 
