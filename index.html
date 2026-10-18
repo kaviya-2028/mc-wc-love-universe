@@ -328,28 +328,30 @@ function showPage(id) {
 function sound(freq=760){
 }
 
-function heartBurst() {
-    const button = $("start");
-    const rect = button.getBoundingClientRect();
 
+function heartBurst() {
+    const button = document.getElementById("start");
+
+    if (!button) return;
+
+    const rect = button.getBoundingClientRect();
     const centerX = rect.left + rect.width / 2;
     const centerY = rect.top + rect.height / 2;
 
     const symbols = ["💗", "💕", "❤️", "💖", "♡", "✨"];
 
-    for (let i = 0; i < 90; i++) {
+    for (let i = 0; i < 45; i++) {
         const item = document.createElement("span");
 
         item.className = "burst";
         item.textContent =
             symbols[Math.floor(Math.random() * symbols.length)];
 
-        // Start exactly where the heart was clicked
         item.style.left = centerX + "px";
         item.style.top = centerY + "px";
 
         const angle = Math.random() * Math.PI * 2;
-        const distance = 100 + Math.random() * 300;
+        const distance = 100 + Math.random() * 250;
 
         item.style.setProperty(
             "--x",
@@ -368,18 +370,16 @@ function heartBurst() {
         setTimeout(() => item.remove(), 1700);
     }
 }
+
+document.getElementById("start").addEventListener("click", function () {
+    heartBurst();
+
+    document.getElementById("welcome").classList.add("hidden");
+    document.getElementById("home").classList.remove("hidden");
+
+    window.scrollTo(0, 0);
+});
   
-const startButton = document.getElementById("start");
-
-if (startButton) {
-    startButton.addEventListener("click", function () {
-        heartBurst();
-
-        setTimeout(function () {
-            showPage("home");
-        }, 300);
-    });
-}
 for(let i=0;i<45;i++){
  const s=document.createElement("span");s.className="star";
  s.textContent=Math.random()>.5?"✦":"✧";
@@ -826,6 +826,7 @@ function fireworks(){
   f.style.setProperty("--fy",(Math.random()*220-110)+"px");
   document.body.appendChild(f);setTimeout(()=>f.remove(),1900);
  },i*22);
+}
 }
 
 </script>
