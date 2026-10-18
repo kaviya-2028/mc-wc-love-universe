@@ -203,10 +203,11 @@ const $=id=>document.getElementById(id);
 const pageIds=["welcome","home","details"];
 let musicOn=false,audio=null,musicTimer=null,noteIndex=0;
 
-function showPage(id){
- pageIds.forEach(p=>$(p).classList.add("hidden"));
- $(id).classList.remove("hidden");
- window.scrollTo(0,0);
+
+function showPage(id) {
+    pageIds.forEach(p => $(p).classList.add("hidden"));
+    $(id).classList.remove("hidden");
+    window.scrollTo(0, 0);
 }
 function sound(freq=760){
 }
@@ -251,6 +252,7 @@ function heartBurst() {
         setTimeout(() => item.remove(), 1700);
     }
 }
+
 
 $("start").onclick = () => {
     heartBurst();
@@ -523,6 +525,30 @@ function celebrate() {
     fireworks();
 }
 
+    
+    // Candle flame click
+    $("candle").onclick = celebrate;
+
+    $("candle").onkeydown = function(e) {
+        if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            celebrate();
+        }
+    };
+
+  } // Closes openGift()
+
+  // Connect the gift box click
+  $("giftBox").onclick = openGift;
+
+  $("giftBox").onkeydown = function(e) {
+      if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          openGift();
+      }
+  };
+
+} // Closes the gift feature
  
 if (type === "songs") {
     title.textContent = "🎧 Our Love Language";
