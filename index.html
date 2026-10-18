@@ -369,16 +369,17 @@ function heartBurst() {
     }
 }
   
+const startButton = document.getElementById("start");
 
-document.getElementById("start").addEventListener("click", function () {
-    heartBurst();
+if (startButton) {
+    startButton.addEventListener("click", function () {
+        heartBurst();
 
-    setTimeout(function () {
-        showPage("home");
-        document.getElementById("start").style.pointerEvents = "auto";
-    }, 300);
-});
-
+        setTimeout(function () {
+            showPage("home");
+        }, 300);
+    });
+}
 for(let i=0;i<45;i++){
  const s=document.createElement("span");s.className="star";
  s.textContent=Math.random()>.5?"✦":"✧";
