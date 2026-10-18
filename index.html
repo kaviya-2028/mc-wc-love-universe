@@ -209,51 +209,58 @@ function showPage(id){
  window.scrollTo(0,0);
 }
 function sound(freq=760){
- try{
-  audio=audio||new(window.AudioContext||window.webkitAudioContext)();
-  audio.resume();
-  const o=audio.createOscillator(),g=audio.createGain();
-  o.type="sine";o.frequency.value=freq;
-  g.gain.setValueAtTime(.04,audio.currentTime);
-  g.gain.exponentialRampToValueAtTime(.001,audio.currentTime+.25);
-  o.connect(g);g.connect(audio.destination);
-  o.start();o.stop(audio.currentTime+.25);
- }catch(e){}
 }
 
 function heartBurst() {
-  const symbols = ["💗", "💕", "❤️", "💖", "🌸", "🌷", "🌹", "✨", "💐"];
+    const button = $("start");
+    const rect = button.getBoundingClientRect();
 
-  for (let i = 0; i < 100; i++) {
-    const item = document.createElement("span");
-    item.className = "burst";
-    item.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
 
-    item.style.left = "50%";
-    item.style.top = "50%";
+    const symbols = ["💗", "💕", "❤️", "💖", "♡", "✨"];
 
-    const angle = Math.random() * Math.PI * 2;
-    const distance = 80 + Math.random() * 350;
+    for (let i = 0; i < 90; i++) {
+        const item = document.createElement("span");
 
-    item.style.setProperty("--x", Math.cos(angle) * distance + "px");
-    item.style.setProperty("--y", Math.sin(angle) * distance + "px");
-    item.style.fontSize = (14 + Math.random() * 24) + "px";
+        item.className = "burst";
+        item.textContent =
+            symbols[Math.floor(Math.random() * symbols.length)];
 
-    document.body.appendChild(item);
-    setTimeout(() => item.remove(), 1800);
-  }
+        // Start exactly where the heart was clicked
+        item.style.left = centerX + "px";
+        item.style.top = centerY + "px";
+
+        const angle = Math.random() * Math.PI * 2;
+        const distance = 100 + Math.random() * 300;
+
+        item.style.setProperty(
+            "--x",
+            Math.cos(angle) * distance + "px"
+        );
+
+        item.style.setProperty(
+            "--y",
+            Math.sin(angle) * distance + "px"
+        );
+
+        item.style.fontSize = (14 + Math.random() * 22) + "px";
+
+        document.body.appendChild(item);
+
+        setTimeout(() => item.remove(), 1700);
+    }
 }
 
 $("start").onclick = () => {
-  sound(850);
-  heartBurst();
+    heartBurst();
 
-  $("start").style.animation = "none";
-  $("start").style.transform = "scale(1.35)";
+    $("start").style.animation = "none";
+    $("start").style.transform = "scale(1.35)";
 
-  setTimeout(() => {
-    showPage("home");
-  }, 1400);
+    setTimeout(() => {
+        showPage("home");
+    }, 500);
 };
 
 for(let i=0;i<45;i++){
@@ -448,31 +455,180 @@ if (type === "story") {
     <div class="birthday-cake">🎂</div>
     <p>Touch the candle flame for your birthday wish!</p>
     <div class="candle" id="candle" role="button" tabindex="0">🔥</div>`;
-   function celebrate(){
-    const g=$("birthdayGreeting");if(g.dataset.done==="yes")return;
-    g.dataset.done="yes";sound(880);
-    g.innerHTML=`<h2 class="birthday-message">🎆 Happy Birthday<br>My Dear Porukii ❤️</h2>
-     <p style="font-size:22px">MC ❤️ WC</p><p>You are loved more than words can say! 💖</p>`;
-    $("candle").textContent="✨";fireworks();
-   }
-   $("candle").onclick=celebrate;
-   $("candle").onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();celebrate()}};
-  }
-  $("giftBox").onclick=openGift;
-  $("giftBox").onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();openGift()}};
- }
+  
+function celebrate() {
+    const g = $("birthdayGreeting");
 
- if(type==="songs"){
-  title.textContent="🎧 Love Language";
-  body.innerHTML=`
-   <div class="card"><h2>💕 Our Romantic Playlist</h2>
-    <p>Choose a song and let it speak for our love.</p>
-    <div class="song"><p>🎵 Perfect — Ed Sheeran</p><a target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=Ed+Sheeran+Perfect+official">▶ Listen on YouTube</a></div>
-    <div class="song"><p>💖 Until I Found You — Stephen Sanchez</p><a target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=Stephen+Sanchez+Until+I+Found+You+official">▶ Listen on YouTube</a></div>
-    <div class="song"><p>🌹 A Thousand Years — Christina Perri</p><a target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=Christina+Perri+A+Thousand+Years+official">▶ Listen on YouTube</a></div>
-    <p style="font-family:'Dancing Script',cursive;font-size:26px">You are my favourite song, on repeat, forever. 💌</p>
-   </div>`;
- }
+    if (g.dataset.done === "yes") return;
+    g.dataset.done = "yes";
+
+    $("candle").textContent = "✨";
+
+    g.innerHTML = `
+        <h2 class="birthday-message">
+            🎆 Happy Birthday<br>
+            My Dear Porukii...!❤️
+        </h2>
+
+        <p style="font-size:22px">MC ❤️ WC</p>
+
+        <p>You are loved more than words can say! 💖</p>
+
+        <div class="card">
+            <h2>🎵 A Song Just For You</h2>
+
+            <input
+                type="file"
+                id="birthdaySongFile"
+                accept="audio/*"
+                style="width:100%;margin:12px 0"
+            >
+
+            <audio
+                id="birthdayAudio"
+                controls
+                style="width:100%;display:none"
+            ></audio>
+
+            <p id="songMessage">
+                Choose your birthday song to play it 💗
+            </p>
+        </div>
+    `;
+
+    const fileInput = $("birthdaySongFile");
+    const player = $("birthdayAudio");
+    const message = $("songMessage");
+
+    fileInput.addEventListener("change", function() {
+        const file = this.files[0];
+        if (!file) return;
+
+        if (player.dataset.oldUrl) {
+            URL.revokeObjectURL(player.dataset.oldUrl);
+        }
+
+        const songUrl = URL.createObjectURL(file);
+        player.dataset.oldUrl = songUrl;
+        player.src = songUrl;
+        player.style.display = "block";
+        message.textContent = "Happy Birthday, my love! ❤️🎂";
+
+        player.play().catch(() => {
+            message.textContent =
+                "Touch Play to start your birthday song 🎵";
+        });
+    });
+
+    fireworks();
+}
+
+ 
+if (type === "songs") {
+    title.textContent = "🎧 Our Love Language";
+
+    body.innerHTML = `
+        <div class="card">
+            <h2>💗 Our Favourite Songs</h2>
+            <p>Every song reminds me of you ❤️</p>
+
+            <div class="song">
+                <p>💕 Our Song</p>
+                <audio controls preload="none" style="width:100%">
+                    <source src="song1.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+
+            <div class="song">
+                <p>💕 Our Song</p>
+                <audio controls preload="none" style="width:100%">
+                    <source src="song2.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+
+            <div class="song">
+                <p>💕 Our Song</p>
+                <audio controls preload="none" style="width:100%">
+                    <source src="song3.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+
+            <div class="song">
+                <p>💕 Our Song</p>
+                <audio controls preload="none" style="width:100%">
+                    <source src="song4.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+
+            <div class="song">
+                <p>💕 Our Song</p>
+                <audio controls preload="none" style="width:100%">
+                    <source src="song5.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+
+            <div class="song">
+                <p>💕 Our Song</p>
+                <audio controls preload="none" style="width:100%">
+                    <source src="song6.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+
+            <div class="song">
+                <p>💕 Our Song</p>
+                <audio controls preload="none" style="width:100%">
+                    <source src="song7.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+
+            <div class="song">
+                <p>💕 Our Song</p>
+                <audio controls preload="none" style="width:100%">
+                    <source src="song8.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+
+            <div class="song">
+                <p>💕 Our Song</p>
+                <audio controls preload="none" style="width:100%">
+                    <source src="song9.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+
+            <div class="song">
+                <p>💕 Our Song</p>
+                <audio controls preload="none" style="width:100%">
+                    <source src="song10.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+
+            <div class="song">
+                <p>💕 Our Song</p>
+                <audio controls preload="none" style="width:100%">
+                    <source src="song11.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+
+            <div class="song">
+                <p>💕 Our Song</p>
+                <audio controls preload="none" style="width:100%">
+                    <source src="song12.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+
+            <div class="song">
+                <p>💕 Our Song</p>
+                <audio controls preload="none" style="width:100%">
+                    <source src="song13.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+
+            <p style="font-family:'Dancing Script',cursive;font-size:26px">
+                You are my favourite song, forever. 💌
+            </p>
+        </div>
+    `;
+}
 
  if(type==="letter"){
   title.textContent="💌 Secret Love Letter";
