@@ -1,0 +1,43 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MC WC Love Universe ❤️</title>
+  <style>
+    body {
+      background: linear-gradient(135deg, #240014, #a32660, #ff477e);
+      color: white;
+      font-family: Georgia, serif;
+      text-align: center;
+      padding: 70px 15px;
+      min-height: 100vh;
+      box-sizing: border-box;
+    }
+    h1 {
+      text-shadow: 0 0 18px #ffb4d1;
+    }
+    .heart {
+      font-size: 100px;
+      color: red;
+      cursor: pointer;
+      animation: beat 1s infinite;
+    }
+    @keyframes beat {
+      50% { transform: scale(1.2); }
+    }
+  </style>
+</head>
+<body>
+  <h1>Welcome to Our<br>Love Universe 💗</h1>
+  <p>Our little world, just for us ✨</p>
+  <div class="heart" onclick="openLove()">❤️</div>
+
+  <script>
+    function openLove() {
+      alert("Welcome to MC WC Love Universe! 💕");
+    }
+  </script>
+</body>
+</html>
