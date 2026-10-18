@@ -184,7 +184,6 @@ p{line-height:1.8}
    <button class="option" onclick="openFeature('songs')"><span>🎧</span>Love Language<br>Romantic Songs</button>
    <button class="option" onclick="openFeature('letter')"><span>💌</span>Secret Love<br>Letter</button>
   </div>
-  <button id="musicButton" onclick="toggleMusic()">🎶 Play Romantic Music</button>
   <p class="eyebrow">✨ TWO HEARTS, ONE UNIVERSE ✨</p>
  </div>
 </section>
@@ -456,13 +455,18 @@ if (type === "story") {
     <div class="candle" id="candle" role="button" tabindex="0">🔥</div>`;
   
 
+
 function celebrate() {
     const g = $("birthdayGreeting");
 
     if (g.dataset.done === "yes") return;
     g.dataset.done = "yes";
 
+    // Sparkle button
     $("candle").textContent = "✨";
+    $("candle").style.animation = "none";
+    $("candle").setAttribute("aria-label", "Stop birthday song");
+    $("candle").title = "Touch to stop the birthday song";
 
     g.innerHTML = `
         <h2 class="birthday-message">
@@ -471,32 +475,39 @@ function celebrate() {
         </h2>
 
         <p style="font-size:22px">MC ❤️ WC</p>
+
         <p>You are loved more than words can say! 💖</p>
 
-        <div class="card">
-            <h2>🎵 A Song Just For You</h2>
-
-            <audio id="birthdayAudio"
-                   controls
-                   autoplay
-                   playsinline
-                   style="width:100%">
-                <source
-                    src="my-birthday-song.mp3"
-                    type="audio/mpeg">
-            </audio>
-
-            <p>Happy Birthday, my love! ❤️🎂</p>
-            <p>If music doesn't start, touch Play 🎶</p>
-        </div>
+        <audio id="birthdayAudio" loop preload="auto">
+            <source
+                src="my-birthday-song.mp3"
+                type="audio/mpeg">
+        </audio>
     `;
 
     const player = $("birthdayAudio");
     player.volume = 1;
 
+    // Try to play the birthday song automatically.
     player.play().catch(() => {
-        // If autoplay is blocked, the Play button remains available.
+        // Browser may block autoplay; see note below.
     });
+
+    // Touch the sparkle again to stop the song.
+    $("candle").onclick = () => {
+        player.pause();
+        player.currentTime = 0;
+        $("candle").textContent = "💖";
+        $("candle").title = "Birthday song stopped";
+        $("candle").onclick = null;
+    };
+
+    $("candle").onkeydown = (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            $("candle").click();
+        }
+    };
 
     fireworks();
 }
@@ -674,24 +685,6 @@ function fireworks(){
  },i*22);
 }
 
-function toggleMusic(){
- if(musicOn){musicOn=false;clearTimeout(musicTimer);if(audio)audio.suspend();$("musicButton").textContent="🎶 Play Romantic Music";return}
- try{
-  audio=audio||new(window.AudioContext||window.webkitAudioContext)();
-  audio.resume();musicOn=true;$("musicButton").textContent="🔇 Stop Romantic Music";playMelody();
- }catch(e){alert("Audio is not available in this browser.")}
-}
-function playMelody(){
- if(!musicOn||!audio)return;
- const notes=[261.63,329.63,392,329.63,293.66,349.23,392,349.23];
- const o=audio.createOscillator(),g=audio.createGain();
- o.type="sine";o.frequency.value=notes[noteIndex++%notes.length];
- g.gain.setValueAtTime(.0001,audio.currentTime);
- g.gain.exponentialRampToValueAtTime(.035,audio.currentTime+.12);
- g.gain.exponentialRampToValueAtTime(.0001,audio.currentTime+.6);
- o.connect(g);g.connect(audio.destination);o.start();o.stop(audio.currentTime+.65);
- musicTimer=setTimeout(playMelody,650);
-}
 </script>
 </body>
 </html>
